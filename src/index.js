@@ -162,7 +162,7 @@ function getVodList(livestreamId){
 		});
 	}
 //get webhook
-app.post("/broadcast/receive_webhook", function (request, response) {
+app.post("/broadcastreceive_webhook", function (request, response) {
 	console.log("new video event from api.video");
   
 	let event = request.body;
