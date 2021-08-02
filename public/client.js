@@ -1,6 +1,6 @@
 window.onload =function() {
     console.log("loaded");
-    var auto_refresh = setTimeout(function(){
+    var auto_refresh = setInterval(function(){
         var liveId = document.getElementById("livestreamid").innerHTML;
         console.log("liveId", liveId);
         var oReq = new XMLHttpRequest();
