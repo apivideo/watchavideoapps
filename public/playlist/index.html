@@ -1,0 +1,127 @@
+<head>
+    <script src="sdk.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script>
+		var __nspid="isrtzw";
+		var __nsptags=[];
+		(function(w, d) { var x = function() {
+		var j=d.createElement("script");j.type="text/javascript";j.async=true;
+		j.src="http"+("https:"===d.location.protocol?"s://cs":"://c")+".ns1p.net/p.js?a="+__nspid;
+		d.body.appendChild(j); }
+		if(w.addEventListener) { w.addEventListener("load", x, false); }
+		else if(w.attachEvent) { w.attachEvent("onload", x); }
+		else { w.onload = x; }
+		}(window, document));
+	</script>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9E9YP1HGF"></script>
+	<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+  		gtag('config', 'G-N9E9YP1HGF');
+    </script>
+    <title>Video Playlist</title>
+</head>
+<body>
+    
+    <div id="video">
+        <img id="prev" src = "prev.png">
+        <div id="myVideo" ></div>
+        <img id="next" src = "next.png">
+
+
+    </div>
+    <br>
+    <br>
+    <div id="videoInfo">
+        text is here
+    </div>
+
+    <div id="footer">
+		This app was created with <a href="https://api.video">api.video</a>.<br/>
+		Get the <a href="https://github.com/dougsillars/videoPlaylist">sample code</a>, and read about <a href="https://a.video/works/a-video-playlist">how we built the demo.</a><br/>
+		More sample apps can be found at <a href="https://a.video">a.video</a>.
+
+	</div>
+	
+
+
+    <script type="text/javascript">
+        var videos = [
+            "vi7RSVfjmrCmQZgS12j7VW5X", //bagpipes
+            "vi5L2tq1d24zp2lK6Dpdn5ZR",//clouds
+            "vi3DZ8BOJBt3DxqenDSDXL1Z",//aathal church
+            "vi6Xe7No0lZeSkqMvLfOCTLR"//surf
+        ];
+        var counter =0;
+
+
+
+
+     
+
+
+//htthttps://go.api.https://go.api.video/videos//videos/
+        window.onload = createVideo(counter);
+
+        document.getElementById("prev").onclick = function() {
+            counter--;
+            if( counter < 0){
+                counter = videos.length -1;
+            }
+            player.destroy();
+            createVideo(counter);
+        }
+        document.getElementById("next").onclick = function() {
+            counter ++;
+            if( counter ==videos.length){
+                counter =0;
+            }
+            player.destroy();
+            createVideo(counter);
+        }
+        
+
+
+        function createVideo(counter) {
+            console.log("video", counter +videos[counter]);
+            window.player = new PlayerSdk("#myVideo", { 
+               id: videos[counter], 
+                autoplay: true
+                // ... other optional options s
+            });
+            player.addEventListener('play', function() { 
+                //console.log("playing");
+                onPlay(counter);
+            });
+            player.addEventListener('ended',function() { 
+                console.log("ended");
+                counter ++;
+                //if we hit the end of the array - start over again
+                if (counter == videos.length){
+                    counter = 0;
+                }
+                onEnd(counter);
+            });
+    
+        }
+        
+        
+        function onPlay(counter) {
+           // console.log("onPlay");
+            console.log("counter" ,counter);
+            document.getElementById('videoInfo').innerHTML = "video playing " + counter;
+            console.log("video playing");
+        }
+        function onEnd(counter){
+            //console.log("onEnd");
+            document.getElementById('videoInfo').innerHTML = "video over" ;
+            //console.log("video over");
+            player.destroy();
+            //video is over - so start another one...
+            createVideo(counter);
+        }
+    </script>
+
+</body>
