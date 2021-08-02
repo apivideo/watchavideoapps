@@ -1,5 +1,6 @@
 window.onload =function() {
-    var auto_refresh = setInterval(function(){
+    console.log("loaded");
+    var auto_refresh = setTimeout(function(){
         var liveId = document.getElementById("livestreamid").innerHTML;
         console.log("liveId", liveId);
         var oReq = new XMLHttpRequest();
@@ -31,5 +32,5 @@ window.onload =function() {
         }
       });*/
     }, 3000);
-    auto_refresh();
+   
 }
